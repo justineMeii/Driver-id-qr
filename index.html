@@ -39,7 +39,8 @@
   }
 
   const url = `id.html?name=${name}&company=${company}&status=${status}`;
-  const fullURL = window.location.origin + "/Driver-id-qr/" + url; // ✅ FIXED
+  const baseURL = "https://justinemeii.github.io/Driver-id-qr/"; // ✅ Hardcoded GitHub Pages URL
+  const fullURL = baseURL + url;
 
   const qr = new QRious({
     element: document.getElementById("qr-code"),
@@ -51,6 +52,7 @@
   downloadLink.href = document.getElementById("qr-code").toDataURL("image/png");
   downloadLink.style.display = "inline-block";
 }
+
 
   </script>
 </body>
