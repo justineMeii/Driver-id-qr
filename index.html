@@ -29,28 +29,29 @@
 
   <script>
     function generateQR() {
-      const name = encodeURIComponent(document.getElementById("name").value.trim());
-      const company = encodeURIComponent(document.getElementById("company").value.trim());
-      const status = encodeURIComponent(document.getElementById("status").value);
+  const name = encodeURIComponent(document.getElementById("name").value.trim());
+  const company = encodeURIComponent(document.getElementById("company").value.trim());
+  const status = encodeURIComponent(document.getElementById("status").value);
 
-      if (!name || !company) {
-        alert("Please complete all fields.");
-        return;
-      }
+  if (!name || !company) {
+    alert("Please complete all fields.");
+    return;
+  }
 
-      const url = `id.html?name=${name}&company=${company}&status=${status}`;
-      const fullURL = window.location.origin + "/Driver-id-qr/" + url;
+  const url = `id.html?name=${name}&company=${company}&status=${status}`;
+  const fullURL = window.location.origin + "/Driver-id-qr/" + url; // ✅ FIXED
 
-      const qr = new QRious({
-        element: document.getElementById("qr-code"),
-        size: 250,
-        value: fullURL
-      });
+  const qr = new QRious({
+    element: document.getElementById("qr-code"),
+    size: 250,
+    value: fullURL
+  });
 
-      const downloadLink = document.getElementById("download-btn");
-      downloadLink.href = document.getElementById("qr-code").toDataURL("image/png");
-      downloadLink.style.display = "inline-block";
-    }
+  const downloadLink = document.getElementById("download-btn");
+  downloadLink.href = document.getElementById("qr-code").toDataURL("image/png");
+  downloadLink.style.display = "inline-block";
+}
+
   </script>
 </body>
 </html>
