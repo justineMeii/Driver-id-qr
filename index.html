@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>QR Code ID Generator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <style>
+    body { font-family: Arial Black; padding: 20px; max-width: 500px; margin: auto; }
+    input, select, button { width: 100%; margin-bottom: 10px; padding: 10px; }
+    #qr { margin-top: 20px; text-align: center; }
+  </style>
+</head>
+<body>
+  <h2 style="color: navy;">Create Driver ID Qr-Code</h2>
+
+  <input type="text" id="name" placeholder="Name" required>
+  <input type="text" id="company" placeholder="Company" required>
+  <select id="status">
+    <option value="Updated">Updated</option>
+    <option value="NotUpdated">Not Updated</option>
+  </select>
+
+  <button onclick="generateQR()">Generate QR Code</button>
+
+  <div id="qr">
+    <canvas id="qr-code"></canvas><br>
+    <a id="download-btn" href="#" download="qr.png">Download QR Code</a>
+  </div>
+
+  <script>
+    function generateQR() {
+      const name = encodeURIComponent(document.getElementById("name").value.trim());
+      const company = encodeURIComponent(document.getElementById("company").value.trim());
+      const status = encodeURIComponent(document.getElementById("status").value);
+
+      if (!name || !company) {
+        alert("Please complete all fields.");
+        return;
+      }
+
+      const url = `id.html?name=${name}&company=${company}&status=${status}`;
+      const fullURL = window.location.origin + "/" + url;
+
+      const qr = new QRious({
+        element: document.getElementById("qr-code"),
+        size: 250,
+        value: fullURL
+      });
+
+      const downloadLink = document.getElementById("download-btn");
+      downloadLink.href = document.getElementById("qr-code").toDataURL("image/png");
+      downloadLink.style.display = "inline-block";
+    }
+  </script>
+</body>
+</html>
